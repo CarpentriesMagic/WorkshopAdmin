@@ -126,16 +126,16 @@ body:
       placeholder: "e.g. https://www.eventbrite.com/e/example-carpentry-event-tickets-1234567890"
     validations:
       required: false
-  - type: checkboxes
+  - type: dropdown
     id: pilot
     attributes:
       label: Pilot
       description: Is this a pilot incubator event?
       options:
-        - label: "Yes"
-          required: true
-        - label: "No"
-          required: true
+        - "Yes"
+        - "No"
+    validations:
+      required: true
   - type: dropdown
     id: carpentry
     attributes:
@@ -205,3 +205,5 @@ body:
         - python
         - hpc 
         - git
+    validations:
+      required: true
