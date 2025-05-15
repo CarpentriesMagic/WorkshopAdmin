@@ -2,14 +2,206 @@ name: Create Carpentry Website
 description: Populate form to create a new carpentry website with the information provided
 title: "[website]: "
 body:
-  - type: markdown 
-    attributes: 
-      value: | 
+  - type: markdown
+    attributes:
+      value: |
         Test putting some words here
   - type: input
-    id: potato
+    id: org
     attributes:
-      label: test info
-      description: test 
+      label: Github Organisation Name
+      description: Github organisation which will be used to create the github pages site
+      placeholder: "e.g. CarpentriesMagic"
     validations:
-      required: true 
+      required: true
+  - type: input
+    id: venue
+    attributes:
+      label: Venue Name
+      description: Name of the venue where the carpentry will be held
+      placeholder: "e.g. University of Carpentry"
+    validations:
+      required: true
+  - type: input
+    id: slug
+    attributes:
+      label: Slug
+      description: Slug to be used for the website.
+      placeholder: "e.g. 2025-05-15-stirling (YYYY-MM-DD-site[-online])"
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      description: Title of the carpentry event
+      placeholder: "e.g. Example Carpentry Event"
+    validations:
+      required: true
+  - type: input
+    id: address
+    attributes:
+      label: Address
+      description: Address of the venue where the carpentry will be held
+      placeholder: "e.g. 123 Carpentry St, Carpentry City, CA 12345"
+    validations:
+      required: true
+  - type: input
+    id: country
+    attributes:
+      label: Country
+      description: Country where the carpentry will be held (two-letter ISO-3166 code for the country)
+      placeholder: "e.g. uk"
+    validations:
+      required: true
+  - type: input
+    id: language
+    attributes:
+      label: Language
+      description: Language of the carpentry event
+      placeholder: "e.g. English"
+    validations:
+      required: true
+  - type: input
+    id: latitude
+    attributes:
+      label: Latitude
+      description: Latitude of the venue where the carpentry will be held
+      placeholder: "e.g. 51.509865"
+    validations:
+      required: true
+  - type: input
+    id: longitude
+    attributes:
+      label: Longitude
+      description: Longitude of the venue where the carpentry will be held
+      placeholder: "e.g. -0.118092"
+    validations:
+      required: true
+  - type: input
+    id: human_date
+    attributes:
+      label: Human Readable Date
+      description: Human readable date of the carpentry event
+      placeholder: "e.g. 15 May 2025"
+    validations:
+      required: true
+  - type: input
+    id: human_time
+    attributes:
+      label: Human Readable Time
+      description: Human readable Time of the carpentry event
+      placeholder: "e.g. 0900-1600"
+    validations:
+      required: true
+  - type: input
+    id: start_date
+    attributes:
+      label: Start Date
+      description: Start date of the carpentry event
+      placeholder: "e.g. 2025-05-15"
+    validations:
+      required: true
+  - type: input
+    id: end_date
+    attributes:
+      label: End Date
+      description: End date of the carpentry event
+      placeholder: "e.g. 2025-05-17"
+    validations:
+      required: true
+  - type: input
+    id: instructors
+    attributes:
+      label: Instructors
+      description: List of instructors for the carpentry event (semicolon separated)
+      placeholder: "e.g. Alice;Bob;Charlie"
+    validations:
+      required: true
+  - type: input
+    id: eventbrite
+    attributes:
+      label: Eventbrite Code
+      description: Code for the event on Eventbrite
+      placeholder: "e.g. https://www.eventbrite.com/e/example-carpentry-event-tickets-1234567890"
+    validations:
+      required: false
+  - type: checkboxes
+    id: pilot
+    attributes:
+      label: Pilot
+      description: Is this a pilot incubator event?
+      options:
+        - label: "Yes"
+          required: true
+        - label: "No"
+          required: true
+  - type: dropdown
+    id: carpentry
+    attributes:
+      label: Type of Carpentry workshop
+      description: Which carpentry is this event for?
+      options:
+        - swc
+        - dc
+        - lc
+        - cp
+        - incubator
+    validations:
+      required: true
+  - type: dropdown
+    id: curriculum
+    attributes:
+      label: Curriculum
+      description: Curriculum being taught
+      options:
+        - dc-astronomy
+        - dc-ecology
+        - dc-genomics
+        - dc-socsci
+        - dc-geospatial
+        - dc-image
+        - swc-inflammation
+        - swc-gapminder
+    validations:
+      required: true
+  - type: dropdown
+    id: flavour
+    attributes:
+      label: Flavour
+      description: Flavour of the lessons being taught at the workshop
+      options:
+        - r
+        - python
+        - na
+    validations:
+      required: true
+  - type: input
+    id: incubator_lesson_site
+    attributes:
+      label: Incubator Lesson Site
+      description: URL of the lesson site for the incubator event
+      placeholder: "e.g. https://example.github.io/lesson-site/"
+  - type: input
+    id: preworkshop_survey
+    attributes:
+      label: Pre-workshop Survey
+      description: URL of the pre-workshop survey
+      placeholder: "e.g. https://example.com/pre-workshop-survey"
+  - type: input
+    id: postworkshop_survey
+    attributes:
+      label: Post-workshop Survey
+      description: URL of the post-workshop survey
+      placeholder: "e.g. https://example.com/post-workshop-survey"
+  - type: dropdown
+    id: schedule
+    attributes:
+      label: Schedule
+      description: Which schedule should be templated
+      options:
+        - unix
+        - r
+        - python
+        - hpc 
+        - git

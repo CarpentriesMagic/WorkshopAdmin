@@ -1,0 +1,15 @@
+name: Process Website Creation
+on: 
+  issues:
+    types: [opened]
+jobs:
+  create_website:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: stefanbuck/github-issue-parser@v3
+        id: issue-parser
+        with:
+          template-path: .github/ISSUE_TEMPLATE/create-website.yml
+      - run: echo '${{ steps.issue-parser.outputs.jsonString }}' > order.json
+      - run: cat order.json
