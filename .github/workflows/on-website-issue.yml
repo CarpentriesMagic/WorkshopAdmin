@@ -18,3 +18,4 @@ jobs:
         with:
           python-version: '3.10'
       - run: python .github/workflows/convert_to_csv.py
+      - run: bash bash.sh website-info.csv
