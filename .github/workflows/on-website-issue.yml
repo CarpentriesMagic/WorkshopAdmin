@@ -13,3 +13,6 @@ jobs:
           template-path: .github/ISSUE_TEMPLATE/create-website.yml
       - run: echo '${{ steps.issue-parser.outputs.jsonString }}' > order.json
       - run: cat order.json
+      - run: cat order.json | jq -r '(map(keys) | add | unique) as $cols | map(. as $row | $cols | map($row[.])) as $rows | $cols, $rows[] | @csv'
+        id: csv
+      - run: echo '${{ steps.csv.outputs.result }}' > order.csv
