@@ -33,3 +33,26 @@ echo  5T1400&p1=136
 echo DTSTAMP:`date +%Y%m%dT%H%M%S`
 echo END:VEVENT
 echo END:VCALENDAR
+
+
+cat <<EOM >>${SLUG}.ics
+BEGIN:VCALENDAR
+VERSION:2.O
+PRODID:${PRODID}
+METHOD:PUBLISH
+BEGIN:VEVENT
+DTSTART:${DTSTART}
+DTEND:${DTEND}
+TRANSP:TRANSPARENT
+SUMMARY:Workshop
+DESCRIPTION:
+LOCATION:${VENUE}
+URL;VALUE=URI:https://www.timeanddate.com/worldclock/meetingdetails.html?i
+ so=20250515T1400&p1=136
+UID:https://www.timeanddate.com/worldclock/meetingdetails.html?iso=2025051
+ 5T1400&p1=136
+DTSTAMP:`date +%Y%m%dT%H%M%S`
+END:VEVENT
+END:VCALENDAR
+
+EOM
