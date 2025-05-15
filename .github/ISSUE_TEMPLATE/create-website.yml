@@ -133,9 +133,7 @@ body:
       description: Is this a pilot incubator event?
       options:
         - label: "Yes"
-          required: true
         - label: "No"
-          required: true
   - type: dropdown
     id: carpentry
     attributes:
