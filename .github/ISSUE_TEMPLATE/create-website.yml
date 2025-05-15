@@ -132,8 +132,8 @@ body:
       label: Pilot
       description: Is this a pilot incubator event?
       options:
-        - "Yes"
         - "No"
+        - "Yes"
     validations:
       required: true
   - type: dropdown
