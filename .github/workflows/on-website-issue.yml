@@ -11,9 +11,11 @@ jobs:
         id: issue-parser
         with:
           template-path: .github/ISSUE_TEMPLATE/create-website.yml
-      - run: echo '${{ steps.issue-parser.outputs.jsonString }}' > order.json
-      - run: cat order.json
-    #   - run: cat order.json | jq -r '(map(keys) | add | unique) as $cols | map(. as $row | $cols | map($row[.])) as $rows | $cols, $rows[] | @csv'
-      - run: cat order.json | jq -r '(.[0] | keys_unsorted) as $keys | $keys, map([.[ $keys[] ]])[] | @csv'
-        id: csv
-      - run: echo '${{ steps.csv.outputs.result }}' > order.csv
+      - run: echo '${{ steps.issue-parser.outputs.jsonString }}' > website-info.json
+      - run: cat website-info.json
+      - name: Set up Python
+        uses: actions/setup-python@v5 
+        with:
+          python-version: '3.10'
+      - run: python .github/workflows/convert_to_csv.py
+      - run: bash bash.sh website-info.csv
