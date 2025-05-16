@@ -109,20 +109,15 @@ incubator_lesson_site: "${INC_LESSON_SITE}"
 incubator_pre_survey: "${PRE_SURVEY}"
 incubator_post_survey: "${POST_SURVEY}"
 EOM
-
-	fi
-
-
-	echo Log into GitHub
-	gh auth login
+    fi
     echo Create website from template
     gh repo create ${ORGANISATION}/${SLUG} --template carpentries/workshop-template --public --description "${TITLE}" 
     echo Edit the URL for GitHub Pages
     gh repo edit ${ORGANISATION}/${SLUG} --homepage "${ORGANISATION}.github.io/${SLUG}"
     echo Clone the repo
     gh repo clone git@github.com:${ORGANISATION}/${SLUG}.git ../${SLUG}
-	echo Wait 15s for cloning to finish
-	sleep 15
+	 echo Wait 10 seconds for cloning to fininsh
+	 wait 10
     echo Delete lines 213 to 263
     sed -i '213,263d' ../${SLUG}/index.md
     echo Insert requirements.inc after line 213 of index.md
