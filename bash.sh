@@ -94,6 +94,8 @@ echo Edit the URL for GitHub Pages
 gh repo edit ${ORGANISATION}/${SLUG} --homepage "${ORGANISATION}.github.io/${SLUG}"
 echo Clone the repo
 gh repo clone git@github.com:${ORGANISATION}/${SLUG}.git ../${SLUG}
+echo Wait 15s for cloning to finish
+sleep 15
 echo Delete lines 213 to 263
 sed -i '213,263d' ../${SLUG}/index.md
 echo Insert requirements.inc after line 213 of index.md
