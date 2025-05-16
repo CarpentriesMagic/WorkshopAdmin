@@ -117,7 +117,7 @@ EOM
     echo Clone the repo
     gh repo clone git@github.com:${ORGANISATION}/${SLUG}.git ../${SLUG}
 	 echo Wait 10 seconds for cloning to fininsh
-	 wait 10
+	 sleep 10
     echo Delete lines 213 to 263
     sed -i '213,263d' ../${SLUG}/index.md
     echo Insert requirements.inc after line 213 of index.md
