@@ -115,7 +115,6 @@ EOM
 
 	echo Log into GitHub
 	gh auth login
-	exit
     echo Create website from template
     gh repo create ${ORGANISATION}/${SLUG} --template carpentries/workshop-template --public --description "${TITLE}" 
     echo Edit the URL for GitHub Pages
