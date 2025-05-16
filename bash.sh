@@ -109,50 +109,21 @@ incubator_lesson_site: "${INC_LESSON_SITE}"
 incubator_pre_survey: "${PRE_SURVEY}"
 incubator_post_survey: "${POST_SURVEY}"
 EOM
-<<<<<<< HEAD
 
-fi
+	fi
 
 
-echo Log into GitHub
-gh auth login
-echo Create website from template
-gh repo create ${ORGANISATION}/${SLUG} --template carpentries/workshop-template --public --description "${TITLE}" 
-echo Edit the URL for GitHub Pages
-gh repo edit ${ORGANISATION}/${SLUG} --homepage "${ORGANISATION}.github.io/${SLUG}"
-echo Clone the repo
-gh repo clone git@github.com:${ORGANISATION}/${SLUG}.git ../${SLUG}
-echo Wait 15s for cloning to finish
-sleep 15
-echo Delete lines 213 to 263
-sed -i '213,263d' ../${SLUG}/index.md
-echo Insert requirements.inc after line 213 of index.md
-sed -i '213r requirements.inc' ../${SLUG}/index.md
-echo Delete lines 38 to 58
-sed -i '38,58d' ../${SLUG}/index.md
-echo Delete lines 6 to 21
-sed -i '6,21d' ../${SLUG}/index.md
-echo Insert index.inc after line 6 of index.md
-sed -i '5r index.inc' ../${SLUG}/index.md
-echo Delete lines 8 to 72 in _config.yml
-sed -i '8,57d' ../${SLUG}/_config.yml
-echo Insert config.inc after line 8 of _config.yml
-sed -i '8r config.inc' ../${SLUG}/_config.yml
-echo Copy schedule
-if [ ${SCHEDULE} != "na" ]
-then
-  cp schedules/${SCHEDULE}.html ../${SLUG}/_includes/${CARPENTRY}/schedule.html
-fi
-=======
-    fi
->>>>>>> origin/use_csv_input
-exit
+	echo Log into GitHub
+	gh auth login
+	exit
     echo Create website from template
     gh repo create ${ORGANISATION}/${SLUG} --template carpentries/workshop-template --public --description "${TITLE}" 
     echo Edit the URL for GitHub Pages
     gh repo edit ${ORGANISATION}/${SLUG} --homepage "${ORGANISATION}.github.io/${SLUG}"
     echo Clone the repo
     gh repo clone git@github.com:${ORGANISATION}/${SLUG}.git ../${SLUG}
+	echo Wait 15s for cloning to finish
+	sleep 15
     echo Delete lines 213 to 263
     sed -i '213,263d' ../${SLUG}/index.md
     echo Insert requirements.inc after line 213 of index.md
