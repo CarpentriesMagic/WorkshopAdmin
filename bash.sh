@@ -121,10 +121,10 @@ EOM
     # THE FOLLOWING LINES REPLACE SOME LINES WITH THE CONTENTS OF includes/requirements.inc
 	 # However, for the moment this is Newcastle specific so I'll comment it out until
 	 # there is a better way to deal with it
-	 echo Delete lines 213 to 263
-    sed -i '213,263d' ../${SLUG}/index.md
-    echo Insert requirements.inc after line 213 of index.md
-    sed -i '213r requirements.inc' ../${SLUG}/index.md
+	 #echo Delete lines 213 to 263
+    #sed -i '213,263d' ../${SLUG}/index.md
+    #echo Insert requirements.inc after line 213 of index.md
+    #sed -i '213r includes/requirements.inc' ../${SLUG}/index.md
     echo Delete lines 38 to 58
     sed -i '38,58d' ../${SLUG}/index.md
     echo Delete lines 6 to 21
