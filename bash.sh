@@ -28,8 +28,12 @@ else
     RESULT=`tail -1 $1`
     echo $RESULT
 
-    #export GH_TOKEN=`cat gh_token`
-    GH_TOKEN=`gh auth token`
+	if [ -f gh_token ]; then
+	  cat gh_token
+     export GH_TOKEN=`cat gh_token`
+   else	
+     GH_TOKEN=`gh auth token`
+   fi
 
     if [ $? != "0" ] ; then
         echo -e "Please login to github command line by running:\n\t gh auth login\n"
@@ -116,7 +120,7 @@ EOM
     gh repo edit ${ORGANISATION}/${SLUG} --homepage "${ORGANISATION}.github.io/${SLUG}"
     echo Clone the repo
     gh repo clone git@github.com:${ORGANISATION}/${SLUG}.git ../${SLUG}
-	 echo Wait 10 seconds for cloning to fininsh
+	 echo Wait 10 seconds for cloning to finish
 	 sleep 10
     echo Delete lines 213 to 263
     sed -i '213,263d' ../${SLUG}/index.md
