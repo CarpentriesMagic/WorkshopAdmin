@@ -1,2 +1,2 @@
 # WorkshopAdmin
-WorkshopAdmin Bash scripts
+This repository was forked from [NclRSE-Training\WorkshopAdmin](https://github.com/NclRSE-Training/WorkshopAdmin/blob/main/bash.sh) and used as the basis for our SSI CW25 hackday project. The original scripts provided for creating a Carpentries workshop website from a MariaDB database. On the hackday we modified the script to work from a CSV file. The script has now been modified to work from both an sql database or a csv script, giving the user a choice. During the hackday we also added a script to create an iCalendar file which can be emailed to participants in the workshop for importing the workshop dates and times into a calendar.
