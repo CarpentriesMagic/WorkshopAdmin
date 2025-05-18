@@ -106,17 +106,20 @@ then
   POST_SURVEY=`echo "$RESULT1"|cut -f23`
   WHATTHREEWORDS=`echo "$RESULT1"|cut -f24`
   SCHEDULE=`echo "$RESULT1"|cut -f25`
+  INSTRUCTOR_LIST=[`echo -e "$RESULT2"|sed "s/\t/ /g"|sed -e "s/^[ \t]*//g"|sed -e "s/^/\"/g"|sed -e "s/$/\"/g"|sed ':a;N;$!ba;s/\n/, /g'|sed -e "s/^[ ]*//g"`]
+  HELPER_LIST=[`echo -e "$RESULT3"|sed "s/\t/ /g"|sed -e "s/^[ \t]*//g"|sed -e "s/^/\"/g"|sed -e "s/$/\"/g"|sed ':a;N;$!ba;s/\n/, /g'|sed -e "s/^[ ]*//g"`]
+   EMAIL_LIST=[`echo -e "$RESULT4"|sed "s/\t/ /g"|sed -e "s/^[ \t]*//g"|sed -e "s/^/\"/g"|sed -e "s/$/\"/g"|sed ':a;N;$!ba;s/\n/, /g'|sed -e "s/^[ ]*//g"`]
 else
 
-   ##### CSV (semi-colon) OPTION TO STORING DATA #####
-   if [[ -z "${1}" ]]
-   then
-     echo "Syntax: bash.sh [spreadsheet.csv]"
-   else
+    ##### CSV (semi-colon) OPTION TO STORING DATA #####
+    if [[ -z "${1}" ]]
+    then
+      echo "Syntax: bash.sh [spreadsheet.csv]"
+    else
 
-       RESULT=`tail -1 $1`
-       echo $RESULT
-   fi
+      RESULT=`tail -1 $1`
+      echo $RESULT
+    fi
 
 
     ORGANISATION=`echo "$RESULT"|cut -d';' -f1`
