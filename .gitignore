@@ -2,3 +2,4 @@ gh_token
 *.inc
 script*.sql
 !includes/*.inc
+includes/db_config.inc

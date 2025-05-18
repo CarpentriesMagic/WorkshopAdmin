@@ -1,0 +1,5 @@
+# To use a 'csv' file set DATA to csv. For an sql database set DATA to 'sql'. If using an sql database also make sure that DB_CLIENT, DB_USER and DB_PASSWD are set correctly
+DATA='csv'
+DB_CLIENT='mysql'
+DB_USER='workshopadmin'
+DB_PASSWD='password'
