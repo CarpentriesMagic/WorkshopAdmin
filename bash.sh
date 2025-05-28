@@ -3,7 +3,7 @@
 
 # READ CONFIGURATION FILE
 source includes/db_config.inc
-
+echo "Data source: ${DATA}"
 # function to make a python style list from comma separated values
 # e.g. input is John Doe, Jane Doe and the output is [ "John Doe", "Jane Doe" ]
 make_list() {
@@ -51,6 +51,9 @@ then
 
   SCRIPT0="select organisation, venue \
   from settings;"
+	SCRIPT0A="select value from settings where keyvalue='organisation'"
+	SCRIPT0B="select value from settings where keyvalue='venue'"
+
 
   SCRIPT1="select slug, w.title, humandate, humantime, startdate, enddate, r.description, r.longitude, r.latitude, language, country, online, pilot, inc_lesson_site, pre_survey, post_survey, carpentry_code, curriculum_code, flavour_id, eventbrite, inc_lesson_site, pre_survey, post_survey, r.what_three_words, schedule \
   from workshops as w \
@@ -69,20 +72,25 @@ then
   join people as p on e.person_id=p.person_id \
   where slug=\"${1}\""
 
-  echo $SCRIPT0 > script0.sql
+  echo $SCRIPT0A > script0a.sql
+  echo $SCRIPT0B > script0b.sql
   echo $SCRIPT1 > script1.sql
   echo $SCRIPT2 > script2.sql
   echo $SCRIPT3 > script3.sql
   echo $SCRIPT4 > script4.sql
 
-  RESULT0="$(${DB_CLIENT} --host=localhost --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script0.sql)"
-  RESULT1="$(${DB_CLIENT} --host=localhost --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script1.sql)"
-  RESULT2="$(${DB_CLIENT} --host=localhost --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script2.sql)"
-  RESULT3="$(${DB_CLIENT} --host=localhost --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script3.sql)"
-  RESULT4="$(${DB_CLIENT} --host=localhost --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script4.sql)"
+  RESULT0A="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script0a.sql)"
+  RESULT0B="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script0b.sql)"
+  RESULT1="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script1.sql)"
+  RESULT2="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script2.sql)"
+  RESULT3="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script3.sql)"
+  RESULT4="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script4.sql)"
 
-  ORGANISATION=`echo "$RESULT0"|cut -f1`
-  VENUE=`echo "$RESULT0"|cut -f2`
+echo ${RESULT0A}
+echo ${RESULT0B}
+
+  ORGANISATION=`echo "$RESULT0A"`
+  VENUE=`echo "$RESULT0B"`
   SLUG=`echo "$RESULT1"|cut -f1`
   TITLE=`echo "$RESULT1"|cut -f2`
   ADDRESS=`echo "$RESULT1"|cut -f7`
@@ -121,7 +129,7 @@ else
       echo $RESULT
     fi
 
-
+exit 1
     ORGANISATION=`echo "$RESULT"|cut -d';' -f1`
     VENUE=`echo "$RESULT"|cut -d';' -f2`
     SLUG=`echo "$RESULT"|cut -d';' -f3`
