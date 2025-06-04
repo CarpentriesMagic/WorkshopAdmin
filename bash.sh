@@ -86,9 +86,6 @@ then
   RESULT3="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script3.sql)"
   RESULT4="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script4.sql)"
 
-echo ${RESULT0A}
-echo ${RESULT0B}
-
   ORGANISATION=`echo "$RESULT0A"`
   VENUE=`echo "$RESULT0B"`
   SLUG=`echo "$RESULT1"|cut -f1`
@@ -119,49 +116,49 @@ echo ${RESULT0B}
    EMAIL_LIST=[`echo -e "$RESULT4"|sed "s/\t/ /g"|sed -e "s/^[ \t]*//g"|sed -e "s/^/\"/g"|sed -e "s/$/\"/g"|sed ':a;N;$!ba;s/\n/, /g'|sed -e "s/^[ ]*//g"`]
 else
 
-    ##### CSV (semi-colon) OPTION TO STORING DATA #####
-    if [[ -z "${1}" ]]
-    then
-      echo "Syntax: bash.sh [spreadsheet.csv]"
-    else
+  ##### CSV (semi-colon) OPTION TO STORING DATA #####
+  if [[ -z "${1}" ]]
+  then
+    echo "Syntax: bash.sh [spreadsheet.csv]"
+  else
 
-      RESULT=`tail -1 $1`
-      echo $RESULT
-    fi
-
-exit 1
-    ORGANISATION=`echo "$RESULT"|cut -d';' -f1`
-    VENUE=`echo "$RESULT"|cut -d';' -f2`
-    SLUG=`echo "$RESULT"|cut -d';' -f3`
-    TITLE=`echo "$RESULT"|cut -d';' -f4`
-    ADDRESS=`echo "$RESULT"|cut -d';' -f5`
-    COUNTRY=`echo "$RESULT"|cut -d';' -f6`
-    LANGUAGE=`echo "$RESULT"|cut -d';' -f7`
-    LATITUDE=`echo "$RESULT"|cut -d';' -f8`
-    LONGITUDE=`echo "$RESULT"|cut -d';'  -f9`
-    HUMANDATE=`echo "$RESULT"|cut -d';' -f10`
-    HUMANTIME=`echo "$RESULT"|cut -d';' -f11`
-    STARTDATE=`echo "$RESULT"|cut -d';' -f12`
-    ENDDATE=`echo "$RESULT"|cut -d';' -f13`
-    INSTRUCTORS=`echo "$RESULT" | cut -d';' -f14`
-    EVENTBRITE=`echo "$RESULT"|cut -d';' -f15`
-    PILOT=`echo "$RESULT"|cut -d';' -f16`
-    CARPENTRY=`echo "$RESULT"|cut -d';' -f17`
-    CURRICULUM=`echo "$RESULT"|cut -d';' -f18`
-    FLAVOUR=`echo "$RESULT"|cut -d';' -f19`
-    INC_LESSON_SITE=`echo "$RESULT"|cut -d';' -f20`
-    PRE_SURVEY=`echo "$RESULT"|cut -d';' -f21`
-    POST_SURVEY=`echo "$RESULT"|cut -d';' -f22`
-    WHATTHREEWORDS=`echo "$RESULT"|cut -d';' -f23`
-    SCHEDULE=`echo "$RESULT"|cut -d';' -f24`
-    HELPERS=`echo "$RESULT"|cut -d';' -f25`
-    EMAIL=`echo "$RESULT"|cut -d';' -f26`
-    HELPER_LIST=$(make_list "$HELPERS")
-    INSTRUCTOR_LIST=$(make_list "$INSTRUCTORS")
-    EMAIL_LIST=$(make_list "$EMAIL")
+    RESULT=`tail -1 $1`
+    echo $RESULT
   fi
 
-  cat <<EOM >index.inc
+
+  ORGANISATION=`echo "$RESULT"|cut -d';' -f1`
+  VENUE=`echo "$RESULT"|cut -d';' -f2`
+  SLUG=`echo "$RESULT"|cut -d';' -f3`
+  TITLE=`echo "$RESULT"|cut -d';' -f4`
+  ADDRESS=`echo "$RESULT"|cut -d';' -f5`
+  COUNTRY=`echo "$RESULT"|cut -d';' -f6`
+  LANGUAGE=`echo "$RESULT"|cut -d';' -f7`
+  LATITUDE=`echo "$RESULT"|cut -d';' -f8`
+  LONGITUDE=`echo "$RESULT"|cut -d';'  -f9`
+  HUMANDATE=`echo "$RESULT"|cut -d';' -f10`
+  HUMANTIME=`echo "$RESULT"|cut -d';' -f11`
+  STARTDATE=`echo "$RESULT"|cut -d';' -f12`
+  ENDDATE=`echo "$RESULT"|cut -d';' -f13`
+  INSTRUCTORS=`echo "$RESULT" | cut -d';' -f14`
+  EVENTBRITE=`echo "$RESULT"|cut -d';' -f15`
+  PILOT=`echo "$RESULT"|cut -d';' -f16`
+  CARPENTRY=`echo "$RESULT"|cut -d';' -f17`
+  CURRICULUM=`echo "$RESULT"|cut -d';' -f18`
+  FLAVOUR=`echo "$RESULT"|cut -d';' -f19`
+  INC_LESSON_SITE=`echo "$RESULT"|cut -d';' -f20`
+  PRE_SURVEY=`echo "$RESULT"|cut -d';' -f21`
+  POST_SURVEY=`echo "$RESULT"|cut -d';' -f22`
+  WHATTHREEWORDS=`echo "$RESULT"|cut -d';' -f23`
+  SCHEDULE=`echo "$RESULT"|cut -d';' -f24`
+  HELPERS=`echo "$RESULT"|cut -d';' -f25`
+  EMAIL=`echo "$RESULT"|cut -d';' -f26`
+  HELPER_LIST=$(make_list "$HELPERS")
+  INSTRUCTOR_LIST=$(make_list "$INSTRUCTORS")
+  EMAIL_LIST=$(make_list "$EMAIL")
+fi
+
+cat <<EOM >index.inc
 venue: "${VENUE}"
 address: "${ADDRESS}"
 country: "${COUNTRY}"
@@ -180,15 +177,15 @@ eventbrite: ${EVENTBRITE}
 what3words: ${WHATTHREEWORDS}
 EOM
 
+P="false"
+if [ "$PILOT" = "yes" -o "$PILOT" = "true" -o "$PILOT" = "1" -o "$PILOT" = "True" ]
+then
+  P="true"
+else
   P="false"
-  if [ "$PILOT" = "yes" -o "$PILOT" = "true" -o "$PILOT" = "1" -o "$PILOT" = "True" ]
-  then 
-    P="true"
-    else
-      P="false"
-    fi
+fi
 
-    cat <<EOM >config.inc
+cat <<EOM >config.inc
 carpentry: "${CARPENTRY}"
 curriculum: "${CURRICULUM}"
 flavor: "${FLAVOUR}"
@@ -196,14 +193,14 @@ pilot: ${P}
 title: "${TITLE}"
 EOM
 
-    if [ "$P" = "true" ]
-    then
-      cat <<EOM >>config.inc
+if [ "$P" = "true" ]
+then
+  cat <<EOM >>config.inc
 incubator_lesson_site: "${INC_LESSON_SITE}"
 incubator_pre_survey: "${PRE_SURVEY}"
 incubator_post_survey: "${POST_SURVEY}"
 EOM
-    fi
+fi
     echo Create website from template
     gh repo create ${ORGANISATION}/${SLUG} --template carpentries/workshop-template --public --description "${TITLE}" 
     echo Edit the URL for GitHub Pages
