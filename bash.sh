@@ -202,19 +202,24 @@ incubator_post_survey: "${POST_SURVEY}"
 EOM
 fi
     echo Create website from template
+    echo gh repo create ${ORGANISATION}/${SLUG} --template carpentries/workshop-template --public --description "${TITLE}" 
     gh repo create ${ORGANISATION}/${SLUG} --template carpentries/workshop-template --public --description "${TITLE}" 
     echo Edit the URL for GitHub Pages
+    echo gh repo edit ${ORGANISATION}/${SLUG} --homepage "${ORGANISATION}.github.io/${SLUG}"
     gh repo edit ${ORGANISATION}/${SLUG} --homepage "${ORGANISATION}.github.io/${SLUG}"
+		echo Wait for 10 seconds for repo creating to finish
+		sleep 10
     echo Clone the repo
+    echo gh repo clone git@github.com:${ORGANISATION}/${SLUG}.git ../${SLUG}
     gh repo clone git@github.com:${ORGANISATION}/${SLUG}.git ../${SLUG}
     echo Wait 10 seconds for cloning to finish
-    sleep 10
-    echo Delete lines 213 to 263
-    sed -i '213,265d' ../${SLUG}/index.md
+		sleep 10
+    echo Delete lines 213 to 264
+    sed -i '213,264d' ../${SLUG}/index.md
     echo Insert requirements.inc after line 213 of index.md
     sed -i '213r requirements.inc' ../${SLUG}/index.md
-    echo Delete lines 38 to 58
-    sed -i '38,58d' ../${SLUG}/index.md
+    echo Delete lines 37 to 61
+    sed -i '37,61d' ../${SLUG}/index.md
     echo Delete lines 6 to 21
     sed -i '6,21d' ../${SLUG}/index.md
     echo Insert index.inc after line 6 of index.md
