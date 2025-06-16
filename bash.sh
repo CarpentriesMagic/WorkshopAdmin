@@ -229,6 +229,7 @@ fi
     echo Insert config.inc after line 8 of _config.yml
     sed -i '8r config.inc' ../${SLUG}/_config.yml
     echo Copy schedule
+		echo Copy schedule: ${SCHEDULE}
     if [ ${SCHEDULE} != "na" ]
     then
       cp schedules/${SCHEDULE}.html ../${SLUG}/_includes/${CARPENTRY}/schedule.html
