@@ -29,7 +29,7 @@ make_list() {
 if [ -f ~/.ssh/gh_token ]
 then
   cat ~/.ssh/gh_token
-  export GH_TOKEN=`cat gh_token`
+  export GH_TOKEN=`cat ~/.ssh/gh_token`
 else  
   GH_TOKEN=`gh auth token`
 fi
@@ -39,7 +39,7 @@ then
   echo -e "Please login to github command line by running:\n\t gh auth login\n"
   exit 1
 fi
-exit 1
+
 ##### SQL OPTION TO STORING DATA #####
 if [[ ${DATA} == "sql" ]]
 then
