@@ -160,7 +160,8 @@ else
   INSTRUCTOR_LIST=$(make_list "$INSTRUCTORS")
   EMAIL_LIST=$(make_list "$EMAIL")
 fi
-
+export COLLABDOC=`echo $RESULT0C|sed "s/<slug>/${SLUG}/"`
+echo "Collaborative doc ${COLLABDOC}"
 cat <<EOM >index.inc
 venue: "${VENUE}"
 address: "${ADDRESS}"
@@ -175,7 +176,7 @@ enddate: ${ENDDATE}
 instructor: ${INSTRUCTOR_LIST}
 helper: ${HELPER_LIST} 
 email: ${EMAIL_LIST} 
-collaborative_notes: ${RESULT0C}${SLUG}
+collaborative_notes: ${COLLABDOC}
 eventbrite: ${EVENTBRITE}
 what3words: ${WHATTHREEWORDS}
 EOM
