@@ -110,7 +110,7 @@ incubator_pre_survey: "${PRE_SURVEY}"
 incubator_post_survey: "${POST_SURVEY}"
 EOM
     fi
-exit
+
     echo Create website from template
     gh repo create ${ORGANISATION}/${SLUG} --template carpentries/workshop-template --public --description "${TITLE}" 
     echo Edit the URL for GitHub Pages
