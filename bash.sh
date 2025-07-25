@@ -4,6 +4,10 @@
 # READ CONFIGURATION FILE
 source includes/db_config.inc
 echo "Data source: ${DATA}"
+echo "DB Client: ${DB_CLIENT}"
+echo "DB_Host: ${DB_HOST}"
+echo "Database name: ${DB_NAME}"
+echo "Connection string: ${DB_STRING}"
 # function to make a python style list from comma separated values
 # e.g. input is John Doe, Jane Doe and the output is [ "John Doe", "Jane Doe" ]
 make_list() {
@@ -49,8 +53,7 @@ then
     exit 1
   fi
 
-  SCRIPT0="select organisation, venue \
-  from settings;"
+   SCRIPT0="select organisation, venue from settings;"
 	SCRIPT0A="select value from settings where keyvalue='organisation'"
 	SCRIPT0B="select value from settings where keyvalue='venue'"
 	SCRIPT0C="select value from settings where keyvalue='collabdoc'"
@@ -73,6 +76,7 @@ then
   join people as p on e.person_id=p.person_id \
   where slug=\"${1}\""
 
+  echo $SCRIPT0A
   echo $SCRIPT0A > script0a.sql
   echo $SCRIPT0B > script0b.sql
   echo $SCRIPT0C > script0c.sql
@@ -83,6 +87,7 @@ then
 
   # RESULT0A="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script0a.sql)"
   RESULT0A="$(${DB_STRING}< script0a.sql)"
+  echo "${DB_STRING}<script0a.sql"
   RESULT0B="$(${DB_STRING}< script0b.sql)"
   RESULT0C="$(${DB_STRING}< script0c.sql)"
   RESULT1="$(${DB_STRING}< script1.sql)"
