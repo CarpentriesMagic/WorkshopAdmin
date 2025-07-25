@@ -81,13 +81,14 @@ then
   echo $SCRIPT3 > script3.sql
   echo $SCRIPT4 > script4.sql
 
-  RESULT0A="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script0a.sql)"
-  RESULT0B="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script0b.sql)"
-  RESULT0C="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script0c.sql)"
-  RESULT1="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script1.sql)"
-  RESULT2="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script2.sql)"
-  RESULT3="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script3.sql)"
-  RESULT4="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script4.sql)"
+  # RESULT0A="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script0a.sql)"
+  RESULT0A="$(${DB_STRING}< script0a.sql)"
+  RESULT0B="$(${DB_STRING}< script0b.sql)"
+  RESULT0C="$(${DB_STRING}< script0c.sql)"
+  RESULT1="$(${DB_STRING}< script1.sql)"
+  RESULT2="$(${DB_STRING}< script2.sql)"
+  RESULT3="$(${DB_STRING}< script3.sql)"
+  RESULT4="$(${DB_STRING}< script4.sql)"
 
   ORGANISATION=`echo "$RESULT0A"`
   VENUE=`echo "$RESULT0B"`
