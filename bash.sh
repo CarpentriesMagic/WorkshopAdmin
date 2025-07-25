@@ -86,8 +86,9 @@ then
   echo $SCRIPT4 > script4.sql
 
   # RESULT0A="$(${DB_CLIENT} --host=${DB_HOST} --skip-column-names --user=${DB_USER} --password=${DB_PASSWD} workshopadmin < script0a.sql)"
+  echo "Script0a: ${DB_STRING}< script0a.sql"
   RESULT0A="$(${DB_STRING}< script0a.sql)"
-  echo "${DB_STRING}<script0a.sql"
+  echo "Result of script0a: ${RESULT0A}"
   RESULT0B="$(${DB_STRING}< script0b.sql)"
   RESULT0C="$(${DB_STRING}< script0c.sql)"
   RESULT1="$(${DB_STRING}< script1.sql)"
@@ -215,6 +216,8 @@ fi
     echo gh repo create ${ORGANISATION}/${SLUG} --template carpentries/workshop-template --public --description "${TITLE}" 
     gh repo create ${ORGANISATION}/${SLUG} --template carpentries/workshop-template --public --description "${TITLE}" 
     echo Edit the URL for GitHub Pages
+	 echo Organisation: ${ORGANISATION}
+	 echo Slug: ${SLUG}
     echo gh repo edit ${ORGANISATION}/${SLUG} --homepage "${ORGANISATION}.github.io/${SLUG}"
     gh repo edit ${ORGANISATION}/${SLUG} --homepage "${ORGANISATION}.github.io/${SLUG}"
 		echo Wait for 10 seconds for repo creating to finish

@@ -1,6 +1,7 @@
 # To use a 'csv' file set DATA to csv. For an sql database set DATA to 'sql'. If using an sql database also make sure that DB_CLIENT, DB_USER and DB_PASSWD are set correctly
 DATA='sql'
 DB_CLIENT='sqlite3'
+# DB_CLIENT='mariadb'
 DB_USER='workshopadmin'
 DB_PASSWD='w0rksh0p'
 DB_HOST='localhost'
